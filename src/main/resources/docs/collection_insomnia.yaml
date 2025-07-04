@@ -1,0 +1,178 @@
+type: collection.insomnia.rest/5.0
+name: UserService
+meta:
+  id: wrk_d6c1a2f0f4704e23976ad848bb1b03a7
+  created: 1751611040272
+  modified: 1751611040272
+  description: ""
+collection:
+  - url: "{{ base_url }}"
+    name: Create User
+    meta:
+      id: req_11a64ccd0fa3471bbda6842e67420693
+      created: 1751611040280
+      modified: 1751619943478
+      isPrivate: false
+      description: ""
+      sortKey: -1751611040280
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "name": "user1",
+            "email": "usermail@prueba.org",
+            "password": "hunter2",
+            "phones": [
+                {
+                    "number": "1234567",
+                    "cityCode": "1",
+                    "countryCode": "57"
+                }
+            ]
+        }
+    parameters:
+      - id: pair_73151255cc55442dae23414e9710d2f6
+        name: ""
+        value: ""
+        description: ""
+        disabled: false
+      - id: pair_ae9be03138414c00bee76727abd71447
+        name: ""
+        value: ""
+        description: ""
+        disabled: false
+    headers:
+      - id: pair_2efd4cdbc96347699f333048b6e530d7
+        name: Content-Type
+        value: application/json
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ base_url }}"
+    name: Get All Users
+    meta:
+      id: req_28113cc3713945b4aad9ffc3cf24386d
+      created: 1751611040283
+      modified: 1751619867077
+      isPrivate: false
+      description: ""
+      sortKey: -1751611040283
+    method: GET
+    parameters:
+      - id: pair_47d8ec4505f04cddab561aab7383c02f
+        name: ""
+        value: Juan Rodriguez
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ base_url }}"
+    name: Update User
+    meta:
+      id: req_4a691dcec2964f9192b31c21b5e9b536
+      created: 1751611040283
+      modified: 1751614866534
+      isPrivate: false
+      description: ""
+      sortKey: -1751611040283
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+            "id": "e83d1590-01d9-4d92-b33a-0d3a431f9f83",
+            "name": "Juan Rodriguez",
+            "email": "juan@rodriguez.org",
+            "password": "hunter4",
+            "phones": [
+                {
+                    "number": "1234567",
+                    "cityCode": "2",
+                    "countryCode": "57"
+                }
+            ]
+        }
+    headers:
+      - id: pair_d393835643c5448289226f5fb140a11d
+        name: Content-Type
+        value: application/json
+        description: ""
+        disabled: false
+      - id: pair_f84b8d31abd143beacf1b626605fd285
+        name: ""
+        value: ""
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ base_url }}/e83d1590-01d9-4d92-b33a-0d3a431f9f83"
+    name: Get User by ID
+    meta:
+      id: req_068f45db3e8b4c0bb2ace45ef4ec7f75
+      created: 1751611040284
+      modified: 1751611040284
+      isPrivate: false
+      description: ""
+      sortKey: -1751611040284
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ base_url }}/79dc67a4-1af5-4790-978a-e6ef4ce9ff20"
+    name: Delete User
+    meta:
+      id: req_783db8bba10b4ba487ad45a8191a64ef
+      created: 1751611040285
+      modified: 1751615185248
+      isPrivate: false
+      description: ""
+      sortKey: -1751611040285
+    method: DELETE
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_5ff28bcb83936cfd945794d14bc88ae769e5a165
+    created: 1751611049282
+    modified: 1751611049282
+environments:
+  name: Base Environment
+  meta:
+    id: env_183389cd0aee47b3a995cca309513dfd
+    created: 1751611040278
+    modified: 1751611040278
+    isPrivate: false
+  data:
+    base_url: http://localhost:8080/users

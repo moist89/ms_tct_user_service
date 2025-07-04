@@ -1,0 +1,52 @@
+
+### Crear usuario
+
+curl --request POST \
+  --url 'http://localhost:8080/users?=&=' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "name": "user1",
+    "email": "usermail@prueba.org",
+    "password": "hunter2",
+    "phones": [
+        {
+            "number": "1234567",
+            "cityCode": "1",
+            "countryCode": "57"
+        }
+    ]
+}'
+
+### Actualizar usuario
+
+curl --request PUT \
+  --url http://localhost:8080/users \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": "e83d1590-01d9-4d92-b33a-0d3a431f9f83",
+    "name": "Juan Rodriguez",
+    "email": "juan@rodriguez.org",
+    "password": "hunter4",
+    "phones": [
+        {
+            "number": "1234567",
+            "cityCode": "2",
+            "countryCode": "57"
+        }
+    ]
+}'
+
+### Obtener usuario por ID
+
+curl --request GET \
+  --url http://localhost:8080/users/e83d1590-01d9-4d92-b33a-0d3a431f9f83
+
+### Buscar usuarios (por nombre o email)
+
+curl --request GET \
+  --url 'http://localhost:8080/users?=Juan%20Rodriguez'
+
+### Eliminar usuario
+
+curl --request DELETE \
+  --url http://localhost:8080/users/e83d1590-01d9-4d92-b33a-0d3a431f9f83
