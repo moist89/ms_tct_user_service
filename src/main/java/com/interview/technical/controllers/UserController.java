@@ -4,6 +4,7 @@ import com.interview.technical.dtos.api.request.UserRequest;
 import com.interview.technical.dtos.api.request.UserUpdateRequest;
 import com.interview.technical.dtos.api.response.UserResponse;
 import com.interview.technical.enums.EMessages;
+import com.interview.technical.exceptions.GeneralException;
 import com.interview.technical.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -53,26 +54,7 @@ public class UserController {
                 .body(userResponse);
     }
 
-    @Operation(summary = "Actualizar un usuario existente")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Usuario actualizado exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Datos inválidos",
-                    content = @Content(schema = @Schema(example = "{\"mensaje\": \"mensaje de error\"}"))),
-            @ApiResponse(responseCode = "404", description = "Usuario no encontrado",
-                    content = @Content(schema = @Schema(example = "{\"mensaje\": \"mensaje de error\"}"))),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
-    @PutMapping(produces = "application/json", consumes = "application/json")
-    public ResponseEntity<UserResponse> update(@Valid @RequestBody UserUpdateRequest userRequest) {
 
-        logger.info(EMessages.MSG_START_METHOD.getValue(), "update");
-
-        UserResponse response = userService.update(userRequest);
-
-        logger.info(EMessages.MSG_END_METHOD.getValue(), "update");
-
-        return ResponseEntity.ok(response);
-    }
 
     @Operation(summary = "Listar usuarios (con filtros opcionales)")
     @ApiResponses(value = {
@@ -103,7 +85,9 @@ public class UserController {
     public ResponseEntity<UserResponse> findById(
             @Parameter(description = "ID del usuario") @PathVariable String id) {
         logger.info(EMessages.MSG_START_METHOD.getValue(), "findById");
-
+        if (id == null || id.trim().isEmpty()) {
+            throw new GeneralException("El ID no puede estar vacío");
+        }
         UserResponse response = userService.findById(id);
 
         logger.info(EMessages.MSG_END_METHOD.getValue(), "findById");
@@ -111,19 +95,4 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(summary = "Eliminar un usuario por ID")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Usuario eliminado exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Usuario no encontrado"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
-    })
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(
-            @Parameter(description = "ID del usuario a eliminar") @PathVariable String id) {
-        logger.info(EMessages.MSG_START_METHOD.getValue(), "delete");
-        userService.delete(id);
-        logger.info(EMessages.MSG_END_METHOD.getValue(), "delete");
-
-        return ResponseEntity.noContent().build();
-    }
 }

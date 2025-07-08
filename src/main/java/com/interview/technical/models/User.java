@@ -128,4 +128,8 @@ public class User {
                 ", active=" + active +
                 '}';
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

@@ -1,0 +1,10 @@
+{
+  "id": "generated-id",
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "created": "timestamp",
+  "modified": "timestamp",
+  "lastLogin": "timestamp",
+  "token": "jwt-token",
+  "isActive": true
+}

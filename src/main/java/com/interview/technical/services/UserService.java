@@ -11,9 +11,7 @@ public interface UserService {
 
     List<UserResponse> findAll(String name, String email);
 
-    UserResponse update(UserUpdateRequest userRequest);
 
     UserResponse create(UserRequest userRequest);
 
-    void delete(String id);
 }

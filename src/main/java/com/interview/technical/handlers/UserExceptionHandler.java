@@ -6,6 +6,7 @@ import com.interview.technical.exceptions.InvalidPasswordException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -39,9 +40,16 @@ public ResponseEntity<Map<String, String>> handleValidationException(MethodArgum
         Map<String, String> error = Map.of("mensaje", ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<Map<String, String>> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
+        Map<String, String> body = new HashMap<>();
+        body.put("mensaje", "El cuerpo de la petición es inválido o está vacío");
+        return ResponseEntity.badRequest().body(body);
+    }
     private ResponseEntity<Map<String, String>> errorResponse(String mensaje, HttpStatus status) {
         Map<String, String> error = new HashMap<>();
         error.put("mensaje", mensaje);
         return new ResponseEntity<>(error, status);
     }
+
 }

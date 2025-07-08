@@ -2,9 +2,7 @@ package com.interview.technical.dtos.api.response;
 
 import java.time.LocalDateTime;
 
-public record UserResponse(String id ,
-                           String name,
-                           String email,
+public record UserResponse(String id,
                            LocalDateTime created ,
                            LocalDateTime modified,
                            LocalDateTime lastLogin,

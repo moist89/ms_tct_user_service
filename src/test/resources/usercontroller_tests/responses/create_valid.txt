@@ -1,0 +1,8 @@
+{
+  "id": "e83d1590-01d9-4d92-b33a-0d3a431f9f83",
+  "created": "2024-01-01T12:00:00",
+  "modified": "2024-01-01T12:00:00",
+  "lastLogin": "2024-01-01T12:00:00",
+  "token": "abc.def.ghi",
+  "isActive": false
+}

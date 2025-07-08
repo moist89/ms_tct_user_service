@@ -91,36 +91,6 @@ public class UserServiceImpl implements  UserService{
         }
     }
 
-    @Override
-    public UserResponse update(UserUpdateRequest userRequest) {
-
-        logger.info(EMessages.MSG_START_METHOD.getValue(), "update");
-
-        try {
-            User user = userJpaRepository.findById(userRequest.id())
-                    .orElseThrow(() -> new GeneralException(EMessages.MSG_ERROR_USER_NOT_FOUND.getValue()));
-
-            if (!user.getEmail().equalsIgnoreCase(userRequest.email())) {
-                throw new GeneralException(EMessages.MSG_ERROR_EMAIL_NOT_ALLOWS_TO_MODIFY.getValue());
-            }
-
-            UserMapper.map(user, userRequest);
-
-            User updated = userJpaRepository.save(user);
-
-            return UserMapper.map(updated);
-
-        } catch (DataIntegrityViolationException e) {
-            logger.error("Violación de integridad de datos al actualizar usuario: {}", e.getMessage(), e);
-            throw new GeneralException(EMessages.MSG_ERROR_DATA_INTEGRITY.getValue());
-
-        }catch ( Exception e) {
-            logger.error("Argumento inválido al actualizar usuario: {}", e.getMessage(), e);
-            throw new GeneralException(EMessages.MSG_ERROR_INVALID_DATA.getValue());
-
-        }
-
-    }
 
     @Override
     public UserResponse create(UserRequest userRequest) {
@@ -133,12 +103,14 @@ public class UserServiceImpl implements  UserService{
 
             User user = UserMapper.map(userRequest);
 
+            if(userRequest.phones()!=null&&!userRequest.phones().isEmpty()){
+                List<Phone>phones = userRequest
+                        .phones().stream().map(p ->
+                                PhoneMapper.map(p,user)).toList();
 
-            List<Phone>phones = userRequest
-                    .phones().stream().map(p ->
-                            PhoneMapper.map(p,user)).toList();
+                user.setPhones(phones);
 
-            user.setPhones(phones);
+            }
 
             User userSaved = userJpaRepository.save(user);
 
@@ -155,23 +127,6 @@ public class UserServiceImpl implements  UserService{
 
 
 
-    @Override
-    public void delete(String id) {
-        logger.info(EMessages.MSG_START_METHOD.getValue(), "delete");
 
-        try {
-            if (!userJpaRepository.existsById(id)) {
-                throw new GeneralException(EMessages.MSG_ERROR_USER_NOT_FOUND.getValue());
-            }
-
-            userJpaRepository.deleteById(id);
-        } catch (Exception e) {
-            logger.error("Error al eliminar usuario: {}", e.getMessage(), e);
-            throw new GeneralException(EMessages.MSG_GENERAL_ERROR.getValue());
-        }
-
-
-
-    }
 
 }

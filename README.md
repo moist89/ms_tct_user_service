@@ -3,13 +3,16 @@
 ##  Descripción
 
 Este servicio permite la **creación, actualización y gestión de usuarios** mediante una API RESTful desarrollada con Java 21 y Spring Boot.
+##  Diagrama solucion : 
+
+![diagrama_user_service.jpg](src/main/resources/docs/diagrama_user_service.jpg)
 
 ## Repositorio
 
 | Elemento       | Enlace o valor |
 |----------------|----------------|
 | Repositorio    | [ms_tct_user_service](https://github.com/moist89/ms_tct_user_service.git) |
-| Branch actual  | `feature/programacion_imperativa` |
+| Branch actual  | `bug-fix/primera_revision_tecnica` |
 | Swagger UI     | [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html#/user-controller/create) |
 
 ##  Tecnologías utilizadas
